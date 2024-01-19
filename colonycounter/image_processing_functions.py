@@ -61,6 +61,10 @@ def make_circle_label(bb_list, img_shape):
 
         # draw circle
         rr, cc = disk((r, c), radius)
+        if rr > img_shape[0]:
+            rr = img_shape[0]
+        if cc > img_shape[1]:
+            cc = img_shape[1]
         label[rr, cc] = id
         id += 1
 
