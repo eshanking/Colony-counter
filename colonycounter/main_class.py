@@ -2,6 +2,7 @@
 
 # import libraries
 from skimage import io, measure, filters, segmentation, morphology, color, exposure
+from skimage.segmentation import watershed
 from skimage.feature import blob_dog, blob_log, blob_doh, peak_local_max
 
 from math import sqrt
@@ -219,7 +220,7 @@ class Counter():
 
 
             # watershed segmentation using the edge image
-            segmentation = morphology.watershed(elevation_map, markers)
+            segmentation = watershed(elevation_map, markers)
 
             segmentation = ndimage.binary_fill_holes(segmentation - 1)
             labeled, _ = ndimage.label(segmentation)
@@ -239,7 +240,7 @@ class Counter():
             markers[bw > white_threshold] = 2
 
             # watershed
-            segmentation = morphology.watershed(elevation_map, markers)
+            segmentation = watershed(elevation_map, markers)
 
             segmentation = ndimage.binary_fill_holes(segmentation - 1)
             labeled, _ = ndimage.label(segmentation)
